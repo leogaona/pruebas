@@ -221,6 +221,11 @@ if (!isset($_SESSION['usr_login'])) {$_SESSION['usr_login'] = "";}
 if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
  
 
+
+
+
+
+$this->sc_temp_usr_login = 'admin';
 $usuario = $this->sc_temp_usr_login;
 $bandera = 1;
 $AclaracionSql = "SELECT CASE WHEN FecImpre IS NULL THEN '' ELSE 	
@@ -891,6 +896,43 @@ if (!isset($_SESSION['GlobalIdFactura'])) {$_SESSION['GlobalIdFactura'] = "";}
 if (!isset($this->sc_temp_GlobalIdFactura)) {$this->sc_temp_GlobalIdFactura = (isset($_SESSION['GlobalIdFactura'])) ? $_SESSION['GlobalIdFactura'] : "";}
  $this->idfactura  = "";
 $this->idtipopago  = "";
+
+
+$numeroAutSql = "SELECT NroAutorizacionTim FROM vw_FacturaImpresion
+WHERE IdFactura ="  .  $this->sc_temp_GlobalIdFactura; 
+ 
+      $nm_select = $numeroAutSql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->numeroAut = array();
+      $this->numeroaut = array();
+      if ($rx = $this->Db->Execute($nm_select)) 
+      { 
+          $y = 0; 
+          $nm_count = $rx->FieldCount();
+          while (!$rx->EOF)
+          { 
+                 for ($x = 0; $x < $nm_count; $x++)
+                 { 
+                        $this->numeroAut[$y] [$x] = $rx->fields[$x];
+                        $this->numeroaut[$y] [$x] = $rx->fields[$x];
+                 }
+                 $y++; 
+                 $rx->MoveNext();
+          } 
+          $rx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->numeroAut = false;
+          $this->numeroAut_erro = $this->Db->ErrorMsg();
+          $this->numeroaut = false;
+          $this->numeroaut_erro = $this->Db->ErrorMsg();
+      } 
+;
+$this->nroaut1  = $this->numeroAut[0][0];
+$this->nroaut2  = $this->numeroAut[0][0];
+$this->nroaut3  = $this->numeroAut[0][0];
 
 
 $exentasSql =  "select SubTotalExenta from vw_FacturaDetalleImpresion where IdFactura = ".$this->sc_temp_GlobalIdFactura;
@@ -3334,156 +3376,6 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->validohasta2) . "\"";
-         }
-   }
-   //----- direcempresa
-   function NM_export_direcempresa()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa))
-         {
-             $this->direcempresa = sc_convert_encoding($this->direcempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa'])) ? $this->New_label['direcempresa'] : "DirecEmpresa"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa) . "\"";
-         }
-   }
-   //----- direcempresa_textoempresa
-   function NM_export_direcempresa_textoempresa()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa_textoempresa))
-         {
-             $this->direcempresa_textoempresa = sc_convert_encoding($this->direcempresa_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa_textoempresa'])) ? $this->New_label['direcempresa_textoempresa'] : "Texto Empresa"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa_textoempresa"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa_textoempresa) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa_textoempresa) . "\"";
-         }
-   }
-   //----- direcempresa2
-   function NM_export_direcempresa2()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa2))
-         {
-             $this->direcempresa2 = sc_convert_encoding($this->direcempresa2, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa2'])) ? $this->New_label['direcempresa2'] : "DirecEmpresa2"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa2"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa2) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa2) . "\"";
-         }
-   }
-   //----- direcempresa2_textoempresa
-   function NM_export_direcempresa2_textoempresa()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa2_textoempresa))
-         {
-             $this->direcempresa2_textoempresa = sc_convert_encoding($this->direcempresa2_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa2_textoempresa'])) ? $this->New_label['direcempresa2_textoempresa'] : "Texto Empresa"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa2_textoempresa"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa2_textoempresa) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa2_textoempresa) . "\"";
-         }
-   }
-   //----- direcempresa3
-   function NM_export_direcempresa3()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa3))
-         {
-             $this->direcempresa3 = sc_convert_encoding($this->direcempresa3, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa3'])) ? $this->New_label['direcempresa3'] : "DirecEmpresa3"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa3"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa3) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa3) . "\"";
-         }
-   }
-   //----- direcempresa3_textoempresa
-   function NM_export_direcempresa3_textoempresa()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa3_textoempresa))
-         {
-             $this->direcempresa3_textoempresa = sc_convert_encoding($this->direcempresa3_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-          if ($this->Xml_tag_label)
-          {
-              $SC_Label = (isset($this->New_label['direcempresa3_textoempresa'])) ? $this->New_label['direcempresa3_textoempresa'] : "Texto Empresa"; 
-          }
-          else
-          {
-              $SC_Label = "direcempresa3_textoempresa"; 
-          }
-          $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa3_textoempresa) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa3_textoempresa) . "\"";
          }
    }
    //----- timbrado_txt2
@@ -6280,6 +6172,231 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->empresa_img3) . "\"";
+         }
+   }
+   //----- direcempresa
+   function NM_export_direcempresa()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa))
+         {
+             $this->direcempresa = sc_convert_encoding($this->direcempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa'])) ? $this->New_label['direcempresa'] : "DirecEmpresa"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa) . "\"";
+         }
+   }
+   //----- direcempresa_textoempresa
+   function NM_export_direcempresa_textoempresa()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa_textoempresa))
+         {
+             $this->direcempresa_textoempresa = sc_convert_encoding($this->direcempresa_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa_textoempresa'])) ? $this->New_label['direcempresa_textoempresa'] : "Texto Empresa"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa_textoempresa"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa_textoempresa) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa_textoempresa) . "\"";
+         }
+   }
+   //----- direcempresa2
+   function NM_export_direcempresa2()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa2))
+         {
+             $this->direcempresa2 = sc_convert_encoding($this->direcempresa2, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa2'])) ? $this->New_label['direcempresa2'] : "DirecEmpresa2"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa2"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa2) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa2) . "\"";
+         }
+   }
+   //----- direcempresa2_textoempresa
+   function NM_export_direcempresa2_textoempresa()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa2_textoempresa))
+         {
+             $this->direcempresa2_textoempresa = sc_convert_encoding($this->direcempresa2_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa2_textoempresa'])) ? $this->New_label['direcempresa2_textoempresa'] : "Texto Empresa"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa2_textoempresa"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa2_textoempresa) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa2_textoempresa) . "\"";
+         }
+   }
+   //----- direcempresa3
+   function NM_export_direcempresa3()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa3))
+         {
+             $this->direcempresa3 = sc_convert_encoding($this->direcempresa3, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa3'])) ? $this->New_label['direcempresa3'] : "DirecEmpresa3"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa3"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa3) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa3) . "\"";
+         }
+   }
+   //----- direcempresa3_textoempresa
+   function NM_export_direcempresa3_textoempresa()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direcempresa3_textoempresa))
+         {
+             $this->direcempresa3_textoempresa = sc_convert_encoding($this->direcempresa3_textoempresa, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['direcempresa3_textoempresa'])) ? $this->New_label['direcempresa3_textoempresa'] : "Texto Empresa"; 
+          }
+          else
+          {
+              $SC_Label = "direcempresa3_textoempresa"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direcempresa3_textoempresa) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direcempresa3_textoempresa) . "\"";
+         }
+   }
+   //----- nroaut1
+   function NM_export_nroaut1()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->nroaut1))
+         {
+             $this->nroaut1 = sc_convert_encoding($this->nroaut1, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['nroaut1'])) ? $this->New_label['nroaut1'] : "NroAut1"; 
+          }
+          else
+          {
+              $SC_Label = "nroaut1"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->nroaut1) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->nroaut1) . "\"";
+         }
+   }
+   //----- nroaut2
+   function NM_export_nroaut2()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->nroaut2))
+         {
+             $this->nroaut2 = sc_convert_encoding($this->nroaut2, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['nroaut2'])) ? $this->New_label['nroaut2'] : "NroAut2"; 
+          }
+          else
+          {
+              $SC_Label = "nroaut2"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->nroaut2) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->nroaut2) . "\"";
+         }
+   }
+   //----- nroaut3
+   function NM_export_nroaut3()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->nroaut3))
+         {
+             $this->nroaut3 = sc_convert_encoding($this->nroaut3, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+          if ($this->Xml_tag_label)
+          {
+              $SC_Label = (isset($this->New_label['nroaut3'])) ? $this->New_label['nroaut3'] : "NroAut3"; 
+          }
+          else
+          {
+              $SC_Label = "nroaut3"; 
+          }
+          $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->nroaut3) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->nroaut3) . "\"";
          }
    }
 

@@ -211,6 +211,11 @@ if (!isset($_SESSION['usr_login'])) {$_SESSION['usr_login'] = "";}
 if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
  
 
+
+
+
+
+$this->sc_temp_usr_login = 'admin';
 $usuario = $this->sc_temp_usr_login;
 $bandera = 1;
 $AclaracionSql = "SELECT CASE WHEN FecImpre IS NULL THEN '' ELSE 	
@@ -1266,54 +1271,6 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['direcempresa'])) ? $this->New_label['direcempresa'] : "DirecEmpresa"; 
-              if ($Cada_col == "direcempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['direcempresa_textoempresa'])) ? $this->New_label['direcempresa_textoempresa'] : "Texto Empresa"; 
-              if ($Cada_col == "direcempresa_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['direcempresa2'])) ? $this->New_label['direcempresa2'] : "DirecEmpresa2"; 
-              if ($Cada_col == "direcempresa2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['direcempresa2_textoempresa'])) ? $this->New_label['direcempresa2_textoempresa'] : "Texto Empresa"; 
-              if ($Cada_col == "direcempresa2_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['direcempresa3'])) ? $this->New_label['direcempresa3'] : "DirecEmpresa3"; 
-              if ($Cada_col == "direcempresa3" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
-              $SC_Label = (isset($this->New_label['direcempresa3_textoempresa'])) ? $this->New_label['direcempresa3_textoempresa'] : "Texto Empresa"; 
-              if ($Cada_col == "direcempresa3_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
               $SC_Label = (isset($this->New_label['timbrado_txt2'])) ? $this->New_label['timbrado_txt2'] : "Timbrado_txt2"; 
               if ($Cada_col == "timbrado_txt2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
@@ -2130,6 +2087,78 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
+              $SC_Label = (isset($this->New_label['direcempresa'])) ? $this->New_label['direcempresa'] : "DirecEmpresa"; 
+              if ($Cada_col == "direcempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['direcempresa_textoempresa'])) ? $this->New_label['direcempresa_textoempresa'] : "Texto Empresa"; 
+              if ($Cada_col == "direcempresa_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['direcempresa2'])) ? $this->New_label['direcempresa2'] : "DirecEmpresa2"; 
+              if ($Cada_col == "direcempresa2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['direcempresa2_textoempresa'])) ? $this->New_label['direcempresa2_textoempresa'] : "Texto Empresa"; 
+              if ($Cada_col == "direcempresa2_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['direcempresa3'])) ? $this->New_label['direcempresa3'] : "DirecEmpresa3"; 
+              if ($Cada_col == "direcempresa3" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['direcempresa3_textoempresa'])) ? $this->New_label['direcempresa3_textoempresa'] : "Texto Empresa"; 
+              if ($Cada_col == "direcempresa3_textoempresa" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['nroaut1'])) ? $this->New_label['nroaut1'] : "NroAut1"; 
+              if ($Cada_col == "nroaut1" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['nroaut2'])) ? $this->New_label['nroaut2'] : "NroAut2"; 
+              if ($Cada_col == "nroaut2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['nroaut3'])) ? $this->New_label['nroaut3'] : "NroAut3"; 
+              if ($Cada_col == "nroaut3" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
           } 
           $this->csv_registro .= $this->Delim_line;
           fwrite($csv_f, $this->csv_registro);
@@ -2299,6 +2328,43 @@ if (!isset($_SESSION['GlobalIdFactura'])) {$_SESSION['GlobalIdFactura'] = "";}
 if (!isset($this->sc_temp_GlobalIdFactura)) {$this->sc_temp_GlobalIdFactura = (isset($_SESSION['GlobalIdFactura'])) ? $_SESSION['GlobalIdFactura'] : "";}
  $this->idfactura  = "";
 $this->idtipopago  = "";
+
+
+$numeroAutSql = "SELECT NroAutorizacionTim FROM vw_FacturaImpresion
+WHERE IdFactura ="  .  $this->sc_temp_GlobalIdFactura; 
+ 
+      $nm_select = $numeroAutSql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->numeroAut = array();
+      $this->numeroaut = array();
+      if ($rx = $this->Db->Execute($nm_select)) 
+      { 
+          $y = 0; 
+          $nm_count = $rx->FieldCount();
+          while (!$rx->EOF)
+          { 
+                 for ($x = 0; $x < $nm_count; $x++)
+                 { 
+                        $this->numeroAut[$y] [$x] = $rx->fields[$x];
+                        $this->numeroaut[$y] [$x] = $rx->fields[$x];
+                 }
+                 $y++; 
+                 $rx->MoveNext();
+          } 
+          $rx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->numeroAut = false;
+          $this->numeroAut_erro = $this->Db->ErrorMsg();
+          $this->numeroaut = false;
+          $this->numeroaut_erro = $this->Db->ErrorMsg();
+      } 
+;
+$this->nroaut1  = $this->numeroAut[0][0];
+$this->nroaut2  = $this->numeroAut[0][0];
+$this->nroaut3  = $this->numeroAut[0][0];
 
 
 $exentasSql =  "select SubTotalExenta from vw_FacturaDetalleImpresion where IdFactura = ".$this->sc_temp_GlobalIdFactura;
@@ -3423,54 +3489,6 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
-   //----- direcempresa
-   function NM_export_direcempresa()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- direcempresa_textoempresa
-   function NM_export_direcempresa_textoempresa()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa_textoempresa);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- direcempresa2
-   function NM_export_direcempresa2()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa2);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- direcempresa2_textoempresa
-   function NM_export_direcempresa2_textoempresa()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa2_textoempresa);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- direcempresa3
-   function NM_export_direcempresa3()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa3);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- direcempresa3_textoempresa
-   function NM_export_direcempresa3_textoempresa()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa3_textoempresa);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
    //----- timbrado_txt2
    function NM_export_timbrado_txt2()
    {
@@ -4530,6 +4548,78 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->empresa_img3);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa
+   function NM_export_direcempresa()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa_textoempresa
+   function NM_export_direcempresa_textoempresa()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa_textoempresa);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa2
+   function NM_export_direcempresa2()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa2);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa2_textoempresa
+   function NM_export_direcempresa2_textoempresa()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa2_textoempresa);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa3
+   function NM_export_direcempresa3()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa3);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcempresa3_textoempresa
+   function NM_export_direcempresa3_textoempresa()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcempresa3_textoempresa);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- nroaut1
+   function NM_export_nroaut1()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->nroaut1);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- nroaut2
+   function NM_export_nroaut2()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->nroaut2);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- nroaut3
+   function NM_export_nroaut3()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->nroaut3);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

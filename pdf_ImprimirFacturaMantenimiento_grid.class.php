@@ -77,12 +77,6 @@ class pdf_ImprimirFacturaMantenimiento_grid
    var $facfecha2 = array();
    var $timbrado2 = array();
    var $validohasta2 = array();
-   var $direcempresa = array();
-   var $direcempresa_textoempresa = array();
-   var $direcempresa2 = array();
-   var $direcempresa2_textoempresa = array();
-   var $direcempresa3 = array();
-   var $direcempresa3_textoempresa = array();
    var $timbrado_txt2 = array();
    var $valido_txt2 = array();
    var $ruc_txt2 = array();
@@ -185,6 +179,15 @@ class pdf_ImprimirFacturaMantenimiento_grid
    var $empresa_img1 = array();
    var $empresa_img2 = array();
    var $empresa_img3 = array();
+   var $direcempresa = array();
+   var $direcempresa_textoempresa = array();
+   var $direcempresa2 = array();
+   var $direcempresa2_textoempresa = array();
+   var $direcempresa3 = array();
+   var $direcempresa3_textoempresa = array();
+   var $nroaut1 = array();
+   var $nroaut2 = array();
+   var $nroaut3 = array();
    var $idfactura = array();
    var $numerofact = array();
    var $montototal = array();
@@ -341,6 +344,11 @@ if (!isset($_SESSION['usr_login'])) {$_SESSION['usr_login'] = "";}
 if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
  
 
+
+
+
+
+$this->sc_temp_usr_login = 'admin';
 $usuario = $this->sc_temp_usr_login;
 $bandera = 1;
 $AclaracionSql = "SELECT CASE WHEN FecImpre IS NULL THEN '' ELSE 	
@@ -1044,12 +1052,6 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['facfecha2'] = "FacFecha2";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['timbrado2'] = "timbrado2";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['validohasta2'] = "validohasta2";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa'] = "DirecEmpresa";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa_textoempresa'] = "Texto Empresa";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa2'] = "DirecEmpresa2";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa2_textoempresa'] = "Texto Empresa";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa3'] = "DirecEmpresa3";
-   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa3_textoempresa'] = "Texto Empresa";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['timbrado_txt2'] = "Timbrado_txt2";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['valido_txt2'] = "Valido_txt2";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['ruc_txt2'] = "Ruc_txt2";
@@ -1152,6 +1154,15 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['empresa_img1'] = "Empresa_img1";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['empresa_img2'] = "Empresa_img2";
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['empresa_img3'] = "Empresa_img3";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa'] = "DirecEmpresa";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa_textoempresa'] = "Texto Empresa";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa2'] = "DirecEmpresa2";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa2_textoempresa'] = "Texto Empresa";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa3'] = "DirecEmpresa3";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['direcempresa3_textoempresa'] = "Texto Empresa";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['nroaut1'] = "NroAut1";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['nroaut2'] = "NroAut2";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['labels']['nroaut3'] = "NroAut3";
    $HTTP_REFERER = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : ""; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['seq_dir'] = 0; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['pdf_ImprimirFacturaMantenimiento']['sub_dir'] = array(); 
@@ -1412,6 +1423,9 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
           $this->empresa_img1[$this->nm_grid_colunas] = "";
           $this->empresa_img2[$this->nm_grid_colunas] = "";
           $this->empresa_img3[$this->nm_grid_colunas] = "";
+          $this->nroaut1[$this->nm_grid_colunas] = "";
+          $this->nroaut2[$this->nm_grid_colunas] = "";
+          $this->nroaut3[$this->nm_grid_colunas] = "";
           $this->Lookup->lookup_rucempresa_txt($this->rucempresa_txt[$this->nm_grid_colunas], $this->codigo[$this->nm_grid_colunas], $this->array_rucempresa_txt); 
           $this->Lookup->lookup_razonsocial_txt($this->razonsocial_txt[$this->nm_grid_colunas], $this->array_razonsocial_txt); 
           $this->Lookup->lookup_exentas_txt($this->exentas_txt[$this->nm_grid_colunas], $this->array_exentas_txt); 
@@ -1436,6 +1450,43 @@ if (!isset($_SESSION['GlobalIdFactura'])) {$_SESSION['GlobalIdFactura'] = "";}
 if (!isset($this->sc_temp_GlobalIdFactura)) {$this->sc_temp_GlobalIdFactura = (isset($_SESSION['GlobalIdFactura'])) ? $_SESSION['GlobalIdFactura'] : "";}
  $this->idfactura[$this->nm_grid_colunas]  = "";
 $this->idtipopago[$this->nm_grid_colunas]  = "";
+
+
+$numeroAutSql = "SELECT NroAutorizacionTim FROM vw_FacturaImpresion
+WHERE IdFactura ="  .  $this->sc_temp_GlobalIdFactura; 
+ 
+      $nm_select = $numeroAutSql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->numeroAut[$this->nm_grid_colunas] = array();
+      $this->numeroaut[$this->nm_grid_colunas] = array();
+      if ($rx = $this->Db->Execute($nm_select)) 
+      { 
+          $y = 0; 
+          $nm_count = $rx->FieldCount();
+          while (!$rx->EOF)
+          { 
+                 for ($x = 0; $x < $nm_count; $x++)
+                 { 
+                        $this->numeroAut[$this->nm_grid_colunas][$y] [$x] = $rx->fields[$x];
+                        $this->numeroaut[$this->nm_grid_colunas][$y] [$x] = $rx->fields[$x];
+                 }
+                 $y++; 
+                 $rx->MoveNext();
+          } 
+          $rx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->numeroAut[$this->nm_grid_colunas] = false;
+          $this->numeroAut_erro[$this->nm_grid_colunas] = $this->Db->ErrorMsg();
+          $this->numeroaut[$this->nm_grid_colunas] = false;
+          $this->numeroaut_erro[$this->nm_grid_colunas] = $this->Db->ErrorMsg();
+      } 
+;
+$this->nroaut1[$this->nm_grid_colunas]  = $this->numeroAut[$this->nm_grid_colunas][0][0];
+$this->nroaut2[$this->nm_grid_colunas]  = $this->numeroAut[$this->nm_grid_colunas][0][0];
+$this->nroaut3[$this->nm_grid_colunas]  = $this->numeroAut[$this->nm_grid_colunas][0][0];
 
 
 $exentasSql =  "select SubTotalExenta from vw_FacturaDetalleImpresion where IdFactura = ".$this->sc_temp_GlobalIdFactura;
@@ -2739,25 +2790,9 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
           { 
               $this->empresa_img1[$this->nm_grid_colunas] = "" ;  
           } 
-          elseif ($this->Ini->Gd_missing)
-          { 
-              $this->empresa_img1[$this->nm_grid_colunas] = "<span class=\"scErrorLine\">" . $this->Ini->Nm_lang['lang_errm_gd'] . "</span>";
-          } 
           else 
           { 
-              $in_empresa_img1 = $this->Ini->root  . $this->Ini->path_imag_cab . "/sys__NM__img__NM__burger_king.png"; 
-              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/sys__NM__img__NM__burger_king.png"); 
-              $out_empresa_img1 = str_replace("/", "_", $this->Ini->path_imag_cab); 
-              $out_empresa_img1 = $this->Ini->path_imag_temp . "/sc_" . $out_empresa_img1 . "_empresa_img1_100100_" . $img_time . "_sys__NM__img__NM__burger_king.png";
-              if (!is_file($this->Ini->root . $out_empresa_img1)) 
-              {  
-                  $sc_obj_img = new nm_trata_img($in_empresa_img1);
-                  $sc_obj_img->setWidth(100);
-                  $sc_obj_img->setHeight(100);
-                  $sc_obj_img->setManterAspecto(true);
-                  $sc_obj_img->createImg($this->Ini->root . $out_empresa_img1);
-              } 
-              $this->empresa_img1[$this->nm_grid_colunas] = $this->NM_raiz_img . $out_empresa_img1;
+              $this->empresa_img1[$this->nm_grid_colunas] = $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/sys__NM__img__NM__burger_king.png"; 
           } 
           $this->empresa_img1[$this->nm_grid_colunas] = $this->SC_conv_utf8($this->empresa_img1[$this->nm_grid_colunas]);
           if ($this->empresa_img2[$this->nm_grid_colunas] === "") 
@@ -2786,6 +2821,21 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
               $this->empresa_img3[$this->nm_grid_colunas] = $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/sys__NM__img__NM__burger_king.png"; 
           } 
           $this->empresa_img3[$this->nm_grid_colunas] = $this->SC_conv_utf8($this->empresa_img3[$this->nm_grid_colunas]);
+          if ($this->nroaut1[$this->nm_grid_colunas] === "") 
+          { 
+              $this->nroaut1[$this->nm_grid_colunas] = "" ;  
+          } 
+          $this->nroaut1[$this->nm_grid_colunas] = $this->SC_conv_utf8($this->nroaut1[$this->nm_grid_colunas]);
+          if ($this->nroaut2[$this->nm_grid_colunas] === "") 
+          { 
+              $this->nroaut2[$this->nm_grid_colunas] = "" ;  
+          } 
+          $this->nroaut2[$this->nm_grid_colunas] = $this->SC_conv_utf8($this->nroaut2[$this->nm_grid_colunas]);
+          if ($this->nroaut3[$this->nm_grid_colunas] === "") 
+          { 
+              $this->nroaut3[$this->nm_grid_colunas] = "" ;  
+          } 
+          $this->nroaut3[$this->nm_grid_colunas] = $this->SC_conv_utf8($this->nroaut3[$this->nm_grid_colunas]);
           foreach ($this->direcempresa_textoempresa[$this->nm_grid_colunas] as $NM_ind => $Dados) 
           {
           if ($this->direcempresa_textoempresa[$this->nm_grid_colunas][$NM_ind] === "") 
@@ -2828,9 +2878,9 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
             $cell_An8 = array('posx' => '170.5', 'posy' => '18.5', 'data' => $this->an8[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_FacFecha = array('posx' => '31.5', 'posy' => '25.1', 'data' => $this->facfecha[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => $this->default_font, 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_timbrado = array('posx' => '147', 'posy' => '7.7', 'data' => $this->timbrado[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_validohasta = array('posx' => '147', 'posy' => '11.2', 'data' => $this->validohasta[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_validohasta = array('posx' => '147', 'posy' => '11.3', 'data' => $this->validohasta[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_timbrado_txt = array('posx' => '133.2', 'posy' => '7.7', 'data' => $this->timbrado_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_Valido_txt = array('posx' => '133.2', 'posy' => '11.2', 'data' => $this->valido_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_Valido_txt = array('posx' => '133.2', 'posy' => '11.3', 'data' => $this->valido_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Ruc_txt = array('posx' => '133.2', 'posy' => '15.6', 'data' => $this->ruc_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_RucEmpresa_txt = array('posx' => '139', 'posy' => '15.6', 'data' => $this->rucempresa_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Factura_txt = array('posx' => '165', 'posy' => '7.6', 'data' => $this->factura_txt[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '10', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
@@ -2886,9 +2936,6 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
             $cell_FacFecha2 = array('posx' => '31.5', 'posy' => '121', 'data' => $this->facfecha[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_timbrado2 = array('posx' => '147', 'posy' => '103.5', 'data' => $this->timbrado[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_validohasta2 = array('posx' => '147', 'posy' => '107', 'data' => $this->validohasta[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_DirecEmpresa_TextoEmpresa = array('posx' => '50', 'posy' => '7.7', 'data' => $this->direcempresa_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_DirecEmpresa2_TextoEmpresa = array('posx' => '50', 'posy' => '103.76217499998693', 'data' => $this->direcempresa2_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_DirecEmpresa3_TextoEmpresa = array('posx' => '50', 'posy' => '199.5', 'data' => $this->direcempresa3_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Timbrado_txt2 = array('posx' => '133', 'posy' => '103.5', 'data' => $this->timbrado_txt2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Valido_txt2 = array('posx' => '133', 'posy' => '107', 'data' => $this->valido_txt2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Ruc_txt2 = array('posx' => '133', 'posy' => '110.5', 'data' => $this->ruc_txt2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
@@ -2986,9 +3033,15 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
             $cell_Firma_txt3 = array('posx' => '30', 'posy' => '287.7', 'data' => $this->firma_txt3[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Aclaracion_txt3 = array('posx' => '94', 'posy' => '287.7', 'data' => $this->aclaracion_txt3[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_CI_txt3 = array('posx' => '166', 'posy' => '287.7', 'data' => $this->ci_txt3[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_Empresa_img1 = array('posx' => '10', 'posy' => '7.4', 'data' => $this->empresa_img1[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => $this->default_font, 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
-            $cell_Empresa_img2 = array('posx' => '10', 'posy' => '103.7166666666536', 'data' => $this->empresa_img2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => $this->default_font, 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_Empresa_img1 = array('posx' => '10', 'posy' => '7.205768333332425', 'data' => $this->empresa_img1[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '4', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_Empresa_img2 = array('posx' => '10', 'posy' => '103.7', 'data' => $this->empresa_img2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => $this->default_font, 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
             $cell_Empresa_img3 = array('posx' => '10', 'posy' => '199', 'data' => $this->empresa_img3[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => $this->default_font, 'font_size'  => '6', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_DirecEmpresa_TextoEmpresa = array('posx' => '50', 'posy' => '6.5', 'data' => $this->direcempresa_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_DirecEmpresa2_TextoEmpresa = array('posx' => '50', 'posy' => '103.45208333332029', 'data' => $this->direcempresa2_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_DirecEmpresa3_TextoEmpresa = array('posx' => '50', 'posy' => '198', 'data' => $this->direcempresa3_textoempresa[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => $this->default_style);
+            $cell_NroAut1 = array('posx' => '187.8', 'posy' => '88.3', 'data' => $this->nroaut1[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => B);
+            $cell_NroAut2 = array('posx' => '187.8', 'posy' => '184.3', 'data' => $this->nroaut2[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => B);
+            $cell_NroAut3 = array('posx' => '187.8', 'posy' => '280.5', 'data' => $this->nroaut3[$this->nm_grid_colunas], 'width'      => '0', 'align'      => 'L', 'font_type'  => 'Helvetica', 'font_size'  => '5', 'color_r'    => '0', 'color_g'    => '0', 'color_b'    => '0', 'font_style' => B);
 
 
             $this->Pdf->SetFont($cell_IdFactura['font_type'], $cell_IdFactura['font_style'], $cell_IdFactura['font_size']);
@@ -4219,7 +4272,7 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
             }
             $this->Pdf->Cell($cell_validohasta2['width'], 0, $cell_validohasta2['data'], 0, 0, $cell_validohasta2['align']);
 
-            $this->Pdf->SetY(7.7);
+            $this->Pdf->SetY(6.7);
             foreach ($this->direcempresa[$this->nm_grid_colunas] as $NM_ind => $Dados)
             {
                 $this->Pdf->SetFont($cell_DirecEmpresa_TextoEmpresa['font_type'], $cell_DirecEmpresa_TextoEmpresa['font_style'], $cell_DirecEmpresa_TextoEmpresa['font_size']);
@@ -4235,7 +4288,7 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
 
                 $this->Pdf->Ln(2);
             }
-            $this->Pdf->SetY(103.76217499998693);
+            $this->Pdf->SetY(102.3);
             foreach ($this->direcempresa2[$this->nm_grid_colunas] as $NM_ind => $Dados)
             {
                 $this->Pdf->SetFont($cell_DirecEmpresa2_TextoEmpresa['font_type'], $cell_DirecEmpresa2_TextoEmpresa['font_style'], $cell_DirecEmpresa2_TextoEmpresa['font_size']);
@@ -4251,7 +4304,7 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
 
                 $this->Pdf->Ln(2);
             }
-            $this->Pdf->SetY(200.81874999997467);
+            $this->Pdf->SetY(198.3);
             foreach ($this->direcempresa3[$this->nm_grid_colunas] as $NM_ind => $Dados)
             {
                 $this->Pdf->SetFont($cell_DirecEmpresa3_TextoEmpresa['font_type'], $cell_DirecEmpresa3_TextoEmpresa['font_style'], $cell_DirecEmpresa3_TextoEmpresa['font_size']);
@@ -5879,6 +5932,55 @@ $_SESSION['scriptcase']['pdf_ImprimirFacturaMantenimiento']['contr_erro'] = 'off
                     $this->Pdf->Image($cell_Empresa_img3['data'], $cell_Empresa_img3['posx'], $cell_Empresa_img3['posy'], 40, 0);
                 }
             }
+
+            $this->Pdf->SetFont($cell_NroAut1['font_type'], $cell_NroAut1['font_style'], $cell_NroAut1['font_size']);
+            $this->pdf_text_color($cell_NroAut1['data'], $cell_NroAut1['color_r'], $cell_NroAut1['color_g'], $cell_NroAut1['color_b']);
+            if (!empty($cell_NroAut1['posx']) && !empty($cell_NroAut1['posy']))
+            {
+                $this->Pdf->SetXY($cell_NroAut1['posx'], $cell_NroAut1['posy']);
+            }
+            elseif (!empty($cell_NroAut1['posx']))
+            {
+                $this->Pdf->SetX($cell_NroAut1['posx']);
+            }
+            elseif (!empty($cell_NroAut1['posy']))
+            {
+                $this->Pdf->SetY($cell_NroAut1['posy']);
+            }
+            $this->Pdf->Cell($cell_NroAut1['width'], 0, $cell_NroAut1['data'], 0, 0, $cell_NroAut1['align']);
+
+            $this->Pdf->SetFont($cell_NroAut2['font_type'], $cell_NroAut2['font_style'], $cell_NroAut2['font_size']);
+            $this->pdf_text_color($cell_NroAut2['data'], $cell_NroAut2['color_r'], $cell_NroAut2['color_g'], $cell_NroAut2['color_b']);
+            if (!empty($cell_NroAut2['posx']) && !empty($cell_NroAut2['posy']))
+            {
+                $this->Pdf->SetXY($cell_NroAut2['posx'], $cell_NroAut2['posy']);
+            }
+            elseif (!empty($cell_NroAut2['posx']))
+            {
+                $this->Pdf->SetX($cell_NroAut2['posx']);
+            }
+            elseif (!empty($cell_NroAut2['posy']))
+            {
+                $this->Pdf->SetY($cell_NroAut2['posy']);
+            }
+            $this->Pdf->Cell($cell_NroAut2['width'], 0, $cell_NroAut2['data'], 0, 0, $cell_NroAut2['align']);
+
+            $this->Pdf->SetFont($cell_NroAut3['font_type'], $cell_NroAut3['font_style'], $cell_NroAut3['font_size']);
+            $this->pdf_text_color($cell_NroAut3['data'], $cell_NroAut3['color_r'], $cell_NroAut3['color_g'], $cell_NroAut3['color_b']);
+            if (!empty($cell_NroAut3['posx']) && !empty($cell_NroAut3['posy']))
+            {
+                $this->Pdf->SetXY($cell_NroAut3['posx'], $cell_NroAut3['posy']);
+            }
+            elseif (!empty($cell_NroAut3['posx']))
+            {
+                $this->Pdf->SetX($cell_NroAut3['posx']);
+            }
+            elseif (!empty($cell_NroAut3['posy']))
+            {
+                $this->Pdf->SetY($cell_NroAut3['posy']);
+            }
+            $this->Pdf->Cell($cell_NroAut3['width'], 0, $cell_NroAut3['data'], 0, 0, $cell_NroAut3['align']);
+
           $max_Y = 0;
           $this->rs_grid->MoveNext();
           $this->sc_proc_grid = false;
